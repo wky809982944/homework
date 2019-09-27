@@ -1,15 +1,32 @@
 <template>
   <div class="block">
     <el-carousel height="500px">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3 class="small">{{ item }}</h3>
+      <el-carousel-item v-for="carousel in carousels" :key="carousel.uuid">
+        <img :src="IMG_BASE_URL+carousel.url" alt="">
       </el-carousel-item>
     </el-carousel>
   </div>
 </template>
 
 <script>
-    export default {}
+  import {IMG_BASE_URL} from "../api";
+  import {mapState} from "vuex";
+  export default {
+      data() {
+          return {
+              IMG_BASE_URL
+          };
+      },
+      mounted() {
+          this.$store.dispatch('getCarousels');
+      },
+      computed:{
+          ...mapState(['carousels']),
+      },
+      methods:{
+      }
+
+    }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
